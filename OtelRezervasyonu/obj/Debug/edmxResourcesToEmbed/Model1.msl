@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="OtelRezervasyonDBModelStoreContainer" CdmEntityContainer="OtelRezervasyonDBEntities">
+    <EntitySetMapping Name="Konaklayan">
+      <EntityTypeMapping TypeName="OtelRezervasyonDBModel.Konaklayan">
+        <MappingFragment StoreEntitySet="Konaklayan">
+          <ScalarProperty Name="KonaklayanID" ColumnName="KonaklayanID" />
+          <ScalarProperty Name="TcKimlikNo" ColumnName="TcKimlikNo" />
+          <ScalarProperty Name="Ad" ColumnName="Ad" />
+          <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+          <ScalarProperty Name="CinsiyetEnum" ColumnName="CinsiyetEnum" />
+          <ScalarProperty Name="DogumTarihi" ColumnName="DogumTarihi" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="Silindi" ColumnName="Silindi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KonaklayanDetay">
+      <EntityTypeMapping TypeName="OtelRezervasyonDBModel.KonaklayanDetay">
+        <MappingFragment StoreEntitySet="KonaklayanDetay">
+          <ScalarProperty Name="KonaklayanDetayID" ColumnName="KonaklayanDetayID" />
+          <ScalarProperty Name="RezervasyonDetayID" ColumnName="RezervasyonDetayID" />
+          <ScalarProperty Name="KonaklayanID" ColumnName="KonaklayanID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Oda">
+      <EntityTypeMapping TypeName="OtelRezervasyonDBModel.Oda">
+        <MappingFragment StoreEntitySet="Oda">
+          <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+          <ScalarProperty Name="OdaID" ColumnName="OdaID" />
+          <ScalarProperty Name="OdaNo" ColumnName="OdaNo" />
+          <ScalarProperty Name="Kapasite" ColumnName="Kapasite" />
+          <ScalarProperty Name="OdaTuruEnum" ColumnName="OdaTuruEnum" />
+          <ScalarProperty Name="Silindi" ColumnName="Silindi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rezervasyon">
+      <EntityTypeMapping TypeName="OtelRezervasyonDBModel.Rezervasyon">
+        <MappingFragment StoreEntitySet="Rezervasyon">
+          <ScalarProperty Name="RezervasyonID" ColumnName="RezervasyonID" />
+          <ScalarProperty Name="RezerveEdenID" ColumnName="RezerveEdenID" />
+          <ScalarProperty Name="GirisTarihi" ColumnName="GirisTarihi" />
+          <ScalarProperty Name="CikisTarihi" ColumnName="CikisTarihi" />
+          <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+          <ScalarProperty Name="Odendi" ColumnName="Odendi" />
+          <ScalarProperty Name="Iptal" ColumnName="Iptal" />
+          <ScalarProperty Name="Silindi" ColumnName="Silindi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RezervasyonDetay">
+      <EntityTypeMapping TypeName="OtelRezervasyonDBModel.RezervasyonDetay">
+        <MappingFragment StoreEntitySet="RezervasyonDetay">
+          <ScalarProperty Name="RezervasyonDetayID" ColumnName="RezervasyonDetayID" />
+          <ScalarProperty Name="RezervasyonID" ColumnName="RezervasyonID" />
+          <ScalarProperty Name="OdaID" ColumnName="OdaID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RezerveEden">
+      <EntityTypeMapping TypeName="OtelRezervasyonDBModel.RezerveEden">
+        <MappingFragment StoreEntitySet="RezerveEden">
+          <ScalarProperty Name="RezerveEdenID" ColumnName="RezerveEdenID" />
+          <ScalarProperty Name="TcKimlikNo" ColumnName="TcKimlikNo" />
+          <ScalarProperty Name="Ad" ColumnName="Ad" />
+          <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Silindi" ColumnName="Silindi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

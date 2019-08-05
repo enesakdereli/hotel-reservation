@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OtelRezervasyonDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Konaklayan">
+    <Key>
+      <PropertyRef Name="KonaklayanID" />
+    </Key>
+    <Property Name="KonaklayanID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TcKimlikNo" Type="String" MaxLength="11" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Ad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Soyad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CinsiyetEnum" Type="Byte" Nullable="false" />
+    <Property Name="DogumTarihi" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Telefon" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Silindi" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="KonaklayanDetay" Relationship="Self.FK_KonaklayanDetay_Konaklayan" FromRole="Konaklayan" ToRole="KonaklayanDetay" />
+  </EntityType>
+  <EntityType Name="KonaklayanDetay">
+    <Key>
+      <PropertyRef Name="KonaklayanDetayID" />
+    </Key>
+    <Property Name="KonaklayanDetayID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RezervasyonDetayID" Type="Int32" Nullable="false" />
+    <Property Name="KonaklayanID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Konaklayan" Relationship="Self.FK_KonaklayanDetay_Konaklayan" FromRole="KonaklayanDetay" ToRole="Konaklayan" />
+    <NavigationProperty Name="RezervasyonDetay" Relationship="Self.FK_KonaklayanDetay_RezervasyonDetay" FromRole="KonaklayanDetay" ToRole="RezervasyonDetay" />
+  </EntityType>
+  <EntityType Name="Oda">
+    <Key>
+      <PropertyRef Name="OdaID" />
+    </Key>
+    <Property Name="OdaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OdaNo" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Kapasite" Type="Byte" Nullable="false" />
+    <Property Name="OdaTuruEnum" Type="Byte" Nullable="false" />
+    <Property Name="Silindi" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="RezervasyonDetay" Relationship="Self.FK_RezervasyonDetay_Oda" FromRole="Oda" ToRole="RezervasyonDetay" />
+    <Property Name="Fiyat" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+  </EntityType>
+  <EntityType Name="Rezervasyon">
+    <Key>
+      <PropertyRef Name="RezervasyonID" />
+    </Key>
+    <Property Name="RezervasyonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RezerveEdenID" Type="Int32" />
+    <Property Name="GirisTarihi" Type="DateTime" Precision="0" />
+    <Property Name="CikisTarihi" Type="DateTime" Precision="0" />
+    <Property Name="Fiyat" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Odendi" Type="Boolean" />
+    <Property Name="Iptal" Type="Boolean" />
+    <Property Name="Silindi" Type="Boolean" />
+    <NavigationProperty Name="RezerveEden" Relationship="Self.FK_Kayit_RezerveEden" FromRole="Rezervasyon" ToRole="RezerveEden" />
+    <NavigationProperty Name="RezervasyonDetay" Relationship="Self.FK_RezervasyonDetay_Rezervasyon" FromRole="Rezervasyon" ToRole="RezervasyonDetay" />
+  </EntityType>
+  <EntityType Name="RezervasyonDetay">
+    <Key>
+      <PropertyRef Name="RezervasyonDetayID" />
+    </Key>
+    <Property Name="RezervasyonDetayID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RezervasyonID" Type="Int32" />
+    <Property Name="OdaID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="KonaklayanDetay" Relationship="Self.FK_KonaklayanDetay_RezervasyonDetay" FromRole="RezervasyonDetay" ToRole="KonaklayanDetay" />
+    <NavigationProperty Name="Oda" Relationship="Self.FK_RezervasyonDetay_Oda" FromRole="RezervasyonDetay" ToRole="Oda" />
+    <NavigationProperty Name="Rezervasyon" Relationship="Self.FK_RezervasyonDetay_Rezervasyon" FromRole="RezervasyonDetay" ToRole="Rezervasyon" />
+  </EntityType>
+  <EntityType Name="RezerveEden">
+    <Key>
+      <PropertyRef Name="RezerveEdenID" />
+    </Key>
+    <Property Name="RezerveEdenID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TcKimlikNo" Type="String" MaxLength="11" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Ad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Soyad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Telefon" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Silindi" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Rezervasyon" Relationship="Self.FK_Kayit_RezerveEden" FromRole="RezerveEden" ToRole="Rezervasyon" />
+  </EntityType>
+  <Association Name="FK_KonaklayanDetay_Konaklayan">
+    <End Role="Konaklayan" Type="Self.Konaklayan" Multiplicity="1" />
+    <End Role="KonaklayanDetay" Type="Self.KonaklayanDetay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Konaklayan">
+        <PropertyRef Name="KonaklayanID" />
+      </Principal>
+      <Dependent Role="KonaklayanDetay">
+        <PropertyRef Name="KonaklayanID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KonaklayanDetay_RezervasyonDetay">
+    <End Role="RezervasyonDetay" Type="Self.RezervasyonDetay" Multiplicity="1" />
+    <End Role="KonaklayanDetay" Type="Self.KonaklayanDetay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RezervasyonDetay">
+        <PropertyRef Name="RezervasyonDetayID" />
+      </Principal>
+      <Dependent Role="KonaklayanDetay">
+        <PropertyRef Name="RezervasyonDetayID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RezervasyonDetay_Oda">
+    <End Role="Oda" Type="Self.Oda" Multiplicity="1" />
+    <End Role="RezervasyonDetay" Type="Self.RezervasyonDetay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Oda">
+        <PropertyRef Name="OdaID" />
+      </Principal>
+      <Dependent Role="RezervasyonDetay">
+        <PropertyRef Name="OdaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Kayit_RezerveEden">
+    <End Role="RezerveEden" Type="Self.RezerveEden" Multiplicity="0..1" />
+    <End Role="Rezervasyon" Type="Self.Rezervasyon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RezerveEden">
+        <PropertyRef Name="RezerveEdenID" />
+      </Principal>
+      <Dependent Role="Rezervasyon">
+        <PropertyRef Name="RezerveEdenID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RezervasyonDetay_Rezervasyon">
+    <End Role="Rezervasyon" Type="Self.Rezervasyon" Multiplicity="0..1" />
+    <End Role="RezervasyonDetay" Type="Self.RezervasyonDetay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rezervasyon">
+        <PropertyRef Name="RezervasyonID" />
+      </Principal>
+      <Dependent Role="RezervasyonDetay">
+        <PropertyRef Name="RezervasyonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="OtelRezervasyonDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Konaklayan" EntityType="Self.Konaklayan" />
+    <EntitySet Name="KonaklayanDetay" EntityType="Self.KonaklayanDetay" />
+    <EntitySet Name="Oda" EntityType="Self.Oda" />
+    <EntitySet Name="Rezervasyon" EntityType="Self.Rezervasyon" />
+    <EntitySet Name="RezervasyonDetay" EntityType="Self.RezervasyonDetay" />
+    <EntitySet Name="RezerveEden" EntityType="Self.RezerveEden" />
+    <AssociationSet Name="FK_KonaklayanDetay_Konaklayan" Association="Self.FK_KonaklayanDetay_Konaklayan">
+      <End Role="Konaklayan" EntitySet="Konaklayan" />
+      <End Role="KonaklayanDetay" EntitySet="KonaklayanDetay" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KonaklayanDetay_RezervasyonDetay" Association="Self.FK_KonaklayanDetay_RezervasyonDetay">
+      <End Role="RezervasyonDetay" EntitySet="RezervasyonDetay" />
+      <End Role="KonaklayanDetay" EntitySet="KonaklayanDetay" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RezervasyonDetay_Oda" Association="Self.FK_RezervasyonDetay_Oda">
+      <End Role="Oda" EntitySet="Oda" />
+      <End Role="RezervasyonDetay" EntitySet="RezervasyonDetay" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Kayit_RezerveEden" Association="Self.FK_Kayit_RezerveEden">
+      <End Role="RezerveEden" EntitySet="RezerveEden" />
+      <End Role="Rezervasyon" EntitySet="Rezervasyon" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RezervasyonDetay_Rezervasyon" Association="Self.FK_RezervasyonDetay_Rezervasyon">
+      <End Role="Rezervasyon" EntitySet="Rezervasyon" />
+      <End Role="RezervasyonDetay" EntitySet="RezervasyonDetay" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
